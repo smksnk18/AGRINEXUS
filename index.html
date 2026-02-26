@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGRINEXUS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="app-header">
+   <div class="app-title" data-lang="app_title">AGRINEXUS</div>
+   <div class="lang-toggle">
+      <button onclick="setLanguage('en')">ENG</button>
+      <button onclick="setLanguage('ta')">தமிழ்</button>
+   </div>
+</header>
+
+<main>
+<section id="screen-home" class="screen">
+   <h2 class="welcome-text" data-lang="welcome">Welcome</h2>
+
+   <div class="tile-container">
+      <div class="tile" onclick="openScreen('screen-farmer-login')">
+         <div class="icon-holder farmer-icon"></div>
+         <span data-lang="farmer_login">Farmer Login</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-buyer-view')">
+         <div class="icon-holder buyer-icon"></div>
+         <span data-lang="buyer_view">Buyer View</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-market')">
+         <div class="icon-holder market-icon"></div>
+         <span data-lang="market_price">Market Price</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-weather')">
+         <div class="icon-holder weather-icon"></div>
+         <span data-lang="weather_advisory">Weather Advisory</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-paddy-guide')">
+         <div class="icon-holder paddy-icon"></div>
+         <span data-lang="paddy_guide">Paddy Guide</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-schemes')">
+         <div class="icon-holder scheme-icon"></div>
+         <span data-lang="schemes">Schemes</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-cotton')">
+          <div class="icon-holder cotton-icon">
+      </div>
+         <span data-lang="Cotton Farming">Cotton Farming</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-eatgood')">
+   <div class="icon-holder eatgood-icon"></div>
+   <span>EatGood</span>
+</div>
+<div class="tile" onclick="openScreen('screen-agrifund')">
+   <div class="icon-holder agrifund-icon"></div>
+   <span>AgriFund</span>
+</div>
+   </div>
+   
+</section>
+
+<section id="screen-farmer-login" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-home')">←</button>
+
+   <h2 data-lang="farmer_login">Farmer Login</h2>
+
+   <label data-lang="enter_mobile">Enter Mobile Number</label>
+   <input id="farmer-mobile">
+
+   <button onclick="sendOTP()" data-lang="send_otp">Send OTP</button>
+</section>
+
+<section id="screen-otp" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-farmer-login')">←</button>
+
+   <h2 data-lang="otp_verification">OTP Verification</h2>
+
+   <label data-lang="enter_otp">Enter OTP</label>
+   <input id="otp-input">
+
+   <button onclick="verifyOTP()" data-lang="verify">Verify</button>
+</section>
+
+<section id="screen-farmer-dashboard" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+   <h2 data-lang="farmer_dashboard">Farmer Dashboard</h2>
+   <div class="tile-container">
+      <div class="tile" onclick="openScreen('screen-farmer-register')">
+         <div class="icon-holder register-icon"></div>
+         <span data-lang="register_farmer">Register Farmer</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-add-stock')">
+         <div class="icon-holder stock-add-icon"></div>
+         <span data-lang="add_stock">Add Stock</span>
+      </div>
+      <div class="tile" onclick="openScreen('screen-my-stock')">
+         <div class="icon-holder stock-view-icon"></div>
+         <span data-lang="my_stock">My Stock</span>
+      </div>
+   </div>
+</section>
+
+<section id="screen-farmer-register" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-farmer-dashboard')">←</button>
+
+<h2 data-lang="register_farmer">Register Farmer</h2>
+
+<label data-lang="enter_name">Farmer Name</label>
+<input id="reg-name">
+
+<label data-lang="enter_district">District</label>
+<select id="reg-district" onchange="loadTaluks(this.value)"></select>
+
+<label data-lang="enter_taluk">Taluk</label>
+<select id="reg-taluk" onchange="loadVillages(this.value)"></select>
+
+<label data-lang="enter_village">Village</label>
+<select id="reg-village"></select>
+
+<button onclick="saveFarmer()" data-lang="save">Save</button>
+
+</section>
+
+<section id="screen-add-stock" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-farmer-dashboard')">← Back</button>
+   <h2 data-lang="add_stock">Add Stock</h2>
+   <select id="stock-crop">
+      <option>Paddy</option><option>Tomato</option><option>Onion</option><option>Chilli</option>
+   </select>
+   <input type="number" id="stock-qty" placeholder="Quantity">
+   <select id="stock-unit"><option>kg</option><option>ton</option></select>
+   <input type="number" id="stock-price" placeholder="Price per unit (₹)">
+   <button onclick="saveStock()">Save</button>
+</section>
+
+<section id="screen-my-stock" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-farmer-dashboard')">← Back</button>
+   <h2 data-lang="my_stock">My Stock</h2>
+   <div id="my-stock-list"></div>
+</section>
+
+<section id="screen-buyer-view" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-home')">←</button>
+
+<h2 data-lang="buyer_view">Buyer View</h2>
+
+<label data-lang="filter_district">District</label>
+<select id="buyer-district" onchange="loadTaluks(this.value,'buyer')"></select>
+
+<label data-lang="filter_taluk">Taluk</label>
+<select id="buyer-taluk" onchange="loadVillages(this.value,'buyer')"></select>
+
+<label data-lang="filter_village">Village</label>
+<select id="buyer-village"></select>
+<select id="price-sort">
+   <option value="">Sort by Price</option>
+   <option value="low">Lowest First</option>
+   <option value="high">Highest First</option>
+</select>
+
+<button onclick="filterStock()" data-lang="search">Search</button>
+
+<div id="buyer-stock-list"></div>
+
+</section>
+
+<section id="screen-weather" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+   <h2 data-lang="weather_advisory">Weather Advisory</h2>
+   <div id="weather-content"></div>
+</section>
+
+<section id="screen-market" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-home')">←</button>
+
+<h2 data-lang="market_price">Market Price</h2>
+
+<table class="data-table">
+   <thead>
+      <tr>
+         <th>Crop</th>
+         <th>Market Analysis</th>
+      </tr>
+   </thead>
+   <tbody id="market-price-table"></tbody>
+</table>
+
+</section>
+
+<section id="screen-paddy-guide" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+   <h2 data-lang="paddy_guide">Paddy Guide</h2>
+   <div id="paddy-varieties"></div>
+</section>
+
+<section id="screen-schemes" class="screen hidden">
+   <button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+   <h2 data-lang="schemes">Schemes</h2>
+   <div id="scheme-list"></div>
+</section>
+
+<section id="screen-cotton" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+
+<h2>Cotton Farming</h2>
+
+<div class="tile-container">
+
+   <!-- Buyer -->
+   <div class="tile" onclick="openScreen('screen-cotton-buyer')">
+      <div class="icon-holder buyer-icon"></div>
+      <span>Cotton Buyer</span>
+   </div>
+
+   <!-- Weather -->
+   <div class="tile" onclick="openScreen('screen-cotton-weather')">
+      <div class="icon-holder weather-icon"></div>
+      <span>Weather</span>
+   </div>
+
+   <!-- Market -->
+   <div class="tile" onclick="openScreen('screen-cotton-market')">
+      <div class="icon-holder market-icon"></div>
+      <span>Market Price</span>
+   </div>
+
+   <!-- Guide -->
+   <div class="tile" onclick="openScreen('screen-cotton-guide')">
+      <div class="icon-holder paddy-icon"></div>
+      <span>Guide</span>
+   </div>
+
+   <!-- Schemes -->
+   <div class="tile" onclick="openScreen('screen-cotton-schemes')">
+      <div class="icon-holder scheme-icon"></div>
+      <span>Schemes</span>
+   </div>
+
+</div>
+
+</section>
+
+<section id="screen-cotton" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+
+<h2>Cotton Farming</h2>
+
+<div class="tile-container">
+   <!-- Buyer -->
+   <div class="tile" onclick="openScreen('screen-cotton-buyer')">
+      <div class="icon-holder buyer-icon"></div>
+      <span>Cotton Buyer</span>
+   </div>
+
+   <!-- Weather -->
+   <div class="tile" onclick="openScreen('screen-cotton-weather')">
+      <div class="icon-holder weather-icon"></div>
+      <span>Weather</span>
+   </div>
+
+   <!-- Market -->
+   <div class="tile" onclick="openScreen('screen-cotton-market')">
+      <div class="icon-holder market-icon"></div>
+      <span>Market Price</span>
+   </div>
+
+   <!-- Guide -->
+   <div class="tile" onclick="openScreen('screen-cotton-guide')">
+      <div class="icon-holder paddy-icon"></div>
+      <span>Guide</span>
+   </div>
+
+   <!-- Schemes -->
+   <div class="tile" onclick="openScreen('screen-cotton-schemes')">
+      <div class="icon-holder scheme-icon"></div>
+      <span>Schemes</span>
+   </div>
+
+</div>
+
+</section>
+
+
+<section id="screen-cotton-buyer" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-cotton')">← Back</button>
+
+<h2>Cotton Buyer Marketplace</h2>
+
+<label>District</label>
+<select id="cotton-district" onchange="loadTaluks(this.value,'buyer')"></select>
+
+<label>Taluk</label>
+<select id="cotton-taluk" onchange="loadVillages(this.value,'buyer')"></select>
+
+<label>Village</label>
+<select id="cotton-village"></select>
+
+<button onclick="filterCottonStock()">Search</button>
+
+<div id="cotton-stock-list"></div>
+
+</section>
+
+
+
+<section id="screen-cotton-weather" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-cotton')">← Back</button>
+
+<h2>Cotton Weather Advisory</h2>
+
+<p>
+Cotton requires warm temperatures (21°C–30°C).  
+Avoid heavy rainfall during flowering.
+</p>
+
+</section>
+
+<section id="screen-cotton-market" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-cotton')">← Back</button>
+
+<h2>Cotton Market Price</h2>
+
+<p>Average Price: ₹6500 – ₹7500 / Quintal</p>
+
+</section>
+
+<section id="screen-cotton-guide" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-cotton')">← Back</button>
+
+<h2>Cotton Cultivation Guide</h2>
+
+<ul>
+<li>Best Soil: Black soil</li>
+<li>Season: Kharif</li>
+<li>Duration: 150–180 days</li>
+<li>Temperature: 20°C–30°C</li>
+</ul>
+
+</section>
+
+<section id="screen-cotton-schemes" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-cotton')">← Back</button>
+
+<h2>Cotton Farming Schemes</h2>
+
+<ul>
+<li>PMFBY Crop Insurance</li>
+<li>Seed Subsidy Programs</li>
+<li>Drip Irrigation Subsidy</li>
+</ul>
+
+</section>
+
+
+<div class="cotton-section">
+   <img id="cotton-image" src="img/cotton1.jpg" alt="Cotton Cultivation">
+   <div class="cotton-text">
+      <h3>Cotton Cultivation</h3>
+      <p id="cotton-fact"></p>
+   </div>
+</div>
+<section id="screen-eatgood" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-home')">← Back</button>
+
+<h2>EatGood – QR Food Transparency</h2>
+
+<div class="tile-container">
+
+   <div class="tile" onclick="openScreen('screen-eatgood-producer')">
+      <span>Producer Portal</span>
+   </div>
+
+   <div class="tile" onclick="openScreen('screen-eatgood-consumer')">
+      <span>Consumer Scanner</span>
+   </div>
+
+</div>
+
+</section>
+
+<section id="screen-eatgood-producer" class="screen hidden">
+
+<button class="back-btn" onclick="openScreen('screen-eatgood')">← Back</button>
+
+<h2>Producer Portal</h2>
+
+<label>Manufacturing Date</label>
+<input type="date" id="eg-mfd">
+
+<label>Expiry Date</label>
+<input type="date" id="eg-exp">
+
+<label>Batch ID</label>
+<input type="text" id="eg-batch">
+
+<label>Brand Name</label>
+<input type="text" id="eg-brand">
+
+<label>Ingredients (Example: Sugar:18g,Salt:2g,PalmOil:10g)</label>
+<input type="text" id="eg-ingredients">
+
+<button onclick="generateEGQR()">Generate QR</button>
+
+<h3>Structured EG1 Data</h3>
+<p id="eg-output"></p>
+
+<h3>QR Code</h3>
+<img id="eg-qr" />
+
+</section>
+
+<section id="screen-eatgood-consumer" class="screen hidden">
+
+<button class="back-btn" onclick="stopScanner(); openScreen('screen-eatgood')">← Back</button>
+
+<h2>Consumer Scanner</h2>
+
+<div id="qr-reader" style="width:300px;"></div>
+
+<button onclick="startScanner()">Start Scanning</button>
+
+<h3>Scanned Data</h3>
+<p id="eg-input"></p>
+
+<h3>Decoded Information</h3>
+<div id="eg-decoded"></div>
+
+<h3>Health Analysis</h3>
+<div id="eg-health"></div>
+
+</section>
+
+
+
+</div>
+
+</section>
+
+</main>
+<script>
+   function trackUser() {
+
+    const name = document.getElementById("username").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name");
+        return;
+    }
+
+    // Get stored users object
+    let users = localStorage.getItem("users");
+
+    // Convert to object if exists
+    users = users ? JSON.parse(users) : {};
+
+    // Check if user already visited
+    if (users[name]) {
+        users[name] += 1;
+    } else {
+        users[name] = 1;
+    }
+
+    // Save back to storage
+    localStorage.setItem("users", JSON.stringify(users));
+
+    // Display greeting
+    document.getElementById("greeting").innerText =
+        `Hello ${name}! You have visited this webpage ${users[name]} times.`;
+}
+
+</script>
+<script src="js/language.js"></script>
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="js/app.js"></script>
+<h2 id="greeting"></h2>
+
+<h2 id="greeting"></h2>
+
+
+
+
+</body>
+</html>

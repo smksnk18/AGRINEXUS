@@ -1,0 +1,388 @@
+.screen {
+   display: none;
+}
+
+.screen:not(.hidden) {
+   display: block;
+}
+.welcome-text{
+
+   font-size:28px;
+   font-weight:800;
+   letter-spacing:1px;
+
+   color:#036c3b;
+
+   text-shadow:
+      0 2px 4px rgba(0,0,0,0.25),
+      0 0 8px rgba(3,108,59,0.25);
+
+   animation: welcomeGlow 2.5s ease-in-out infinite alternate;
+}
+
+
+/* animation */
+@keyframes welcomeGlow{
+
+   from{
+      text-shadow:
+         0 2px 4px rgba(0,0,0,0.2),
+         0 0 4px rgba(3,108,59,0.2);
+   }
+
+   to{
+      text-shadow:
+         0 3px 8px rgba(0,0,0,0.35),
+         0 0 12px rgba(3,108,59,0.45);
+   }
+
+}
+
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: Arial, sans-serif;
+}
+
+body {
+   background: #f5f7fa;
+   color: #222;
+   overflow-x: hidden;
+}
+
+.screen {
+   display: none;
+   padding: 20px;
+}
+
+.screen.active {
+   display: block;
+}
+
+.screen.hidden {
+   display: none;
+}
+
+.app-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 14px 16px;
+   background: #036c3b;
+   color: white;
+   font-weight: bold;
+   text-align:center;
+}
+
+
+.lang-toggle button {
+   margin-left: 6px;
+   background: white;
+   color: #036c3b;
+   border: none;
+   padding: 6px 10px;
+   border-radius: 4px;
+   cursor: pointer;
+   font-weight: bold;
+
+
+}
+.tile-container {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 12px;
+   margin-top: 20px;
+}
+
+.tile {
+   background: white;
+   padding: 16px;
+   border-radius: 12px;
+   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+   text-align: center;
+   font-weight: bold;
+   cursor: pointer;
+   transition: 0.2s;
+}
+
+.tile:hover {
+   transform: scale(1.05);
+}
+
+.icon-holder{
+   width:50px;
+   height:50px;
+
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+   margin:0 auto 8px;
+}
+
+
+.back-btn {
+   display: inline-block;
+   margin-bottom: 12px;
+   background: #444;
+   color: white;
+   padding: 6px 10px;
+   border-radius: 6px;
+   cursor: pointer;
+}
+
+button {
+   margin-top: 10px;
+   padding: 8px 14px;
+   border: none;
+   background: #036c3b;
+   color: white;
+   font-weight: bold;
+   border-radius: 6px;
+   cursor: pointer;
+   transition: 0.2s;
+}
+
+button:hover {
+   background: #024e2b;
+}
+
+input, select {
+   width: 100%;
+   padding: 8px;
+   margin-top: 6px;
+   border: 1px solid #ccc;
+   border-radius: 6px;
+   font-size: 14px;
+}
+
+label {
+   display: block;
+   margin-top: 10px;
+   font-weight: 600;
+}
+
+.data-table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-top: 14px;
+}
+
+.data-table th {
+   background: #036c3b;
+   color: white;
+   padding: 8px;
+   text-align: left;
+}
+
+.data-table td {
+   border: 1px solid #ccc;
+   padding: 8px;
+}
+
+#buyer-stock-list, #my-stock-list {
+   margin-top: 12px;
+   display: grid;
+   gap: 10px;
+}
+
+.stock-card {
+   background: white;
+   border-radius: 10px;
+   padding: 12px;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+   font-size: 14px;
+}
+
+#weather-content {
+   margin-top: 10px;
+   padding: 12px;
+   background: white;
+   border-radius: 10px;
+   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+   font-size: 14px;
+}
+
+#paddy-varieties {
+   margin-top: 12px;
+   display: grid;
+   gap: 10px;
+}
+
+.paddy-card {
+   background: white;
+   padding: 12px;
+   border-radius: 10px;
+   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+   font-size: 14px;
+}
+
+#scheme-list {
+   margin-top: 12px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.scheme-card {
+   background: white;
+   padding: 12px;
+   border-radius: 10px;
+   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+   font-size: 14px;
+}
+
+@media (min-width: 768px) {
+   .tile-container {
+      grid-template-columns: repeat(4, 1fr);
+   }
+}
+
+@media (min-width: 1200px) {
+   .tile-container {
+      grid-template-columns: repeat(5, 1fr);
+   }
+}
+
+.farmer-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.buyer-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 4V6H3V8H4L7 17H19L22 8H9V6H21V4H7ZM9.38 10H19.62L17.38 16H8.62L9.38 10ZM7 20C7 21.1 6.1 22 5 22C3.9 22 3 21.1 3 20C3 18.9 3.9 18 5 18C6.1 18 7 18.9 7 20ZM21 20C21 21.1 20.1 22 19 22C17.9 22 17 21.1 17 20C17 18.9 17.9 18 19 18C20.1 18 21 18.9 21 20Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.market-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3H5V21H3V3ZM7 3H9V21H7V3ZM11 3H13V21H11V3ZM15 3H17V21H15V3ZM19 3H21V21H19V3Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.weather-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 19H18V17H6V19ZM4 15H20V13H4V15ZM2 11H22V9H2V11ZM0 5V7H24V5H0Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.paddy-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2ZM7 22H17V20H7V22Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.scheme-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5V11C3 16.55 7.03 21.74 12 23C16.97 21.74 21 16.55 21 11V5L12 1Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.stock-add-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.stock-view-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H20V6H4V4ZM4 10H20V12H4V10ZM4 16H20V18H4V16Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.register-icon {
+   background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"/></svg>');
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+/* ===== Animated Background ===== */
+
+body{
+   animation: gradientBG 12s ease infinite;
+   background: linear-gradient(270deg,#dff6e3,#f4f7fb,#e6f2ff,#dff6e3);
+   background-size:600% 600%;
+}
+
+/* animation keyframes */
+@keyframes gradientBG{
+
+   0%{
+      background-position:0% 50%;
+   }
+
+   50%{
+      background-position:100% 50%;
+   }
+
+   100%{
+      background-position:0% 50%;
+   }
+}
+
+/* ===== Title Shadow Effect ===== */
+
+.app-title{
+   font-size:24px;
+   font-weight:bold;
+
+   text-shadow:
+      2px 2px 6px rgba(0,0,0,0.35),
+      0px 0px 12px rgba(255,255,255,0.6);
+}
+.cotton-icon{
+   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12 2a4 4 0 014 4c0 1.5-.8 2.8-2 3.5A5 5 0 1112 2z'/></svg>");
+   background-size:contain;
+   background-repeat:no-repeat;
+   background-position:center;
+}
+
+
+.cotton-section{
+   display:flex;
+   align-items:center;
+   gap:20px;
+
+   background:white;
+   padding:15px;
+   border-radius:12px;
+
+   box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+.eatgood-icon{
+   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='3' y='3' width='7' height='7' fill='black'/><rect x='14' y='3' width='7' height='7' fill='black'/><rect x='3' y='14' width='7' height='7' fill='black'/><circle cx='17' cy='17' r='3' fill='black'/></svg>");
+   background-size:contain;
+   background-repeat:no-repeat;
+   background-position:center;
+}
+.agrifund-icon{
+   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='9' fill='black'/><text x='12' y='16' font-size='12' text-anchor='middle' fill='white'>$</text></svg>");
+   background-size:contain;
+   background-repeat:no-repeat;
+   background-position:center;
+}
+.cotton-section img {
+   width: 160px;
+   height: 120px;
+   object-fit: cover;
+   border-radius: 10px;
+}
+
+.cotton-text h3 {
+   margin-bottom: 6px;
+   color: #036c3b;
+}
+
+.cotton-text p {
+   font-size: 14px;
+   line-height: 1.5;
+}
+
+.tile-icon{
+   width:38px;
+   height:38px;
+   object-fit:contain;
+}
