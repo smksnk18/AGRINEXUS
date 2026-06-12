@@ -28,7 +28,7 @@
       overflow-x: hidden;
     }
 
-    /* Hero Section */
+    /* ── HERO ── */
     .hero {
       position: relative;
       height: 100vh;
@@ -39,12 +39,12 @@
       overflow: hidden;
     }
 
+    /* Slideshow */
     .slides {
       position: absolute;
       inset: 0;
       z-index: 0;
     }
-    
     .slide {
       position: absolute;
       inset: 0;
@@ -54,17 +54,16 @@
       transition: opacity 1.4s ease-in-out, transform 8s ease-in-out;
       transform: scale(1.08);
     }
-    
     .slide.active {
       opacity: 1;
       transform: scale(1);
     }
-    
     .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400&q=80'); }
     .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1400&q=80'); }
     .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1400&q=80'); }
     .slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1400&q=80'); }
 
+    /* Dark overlay with diagonal crop */
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -72,6 +71,7 @@
       z-index: 1;
     }
 
+    /* Slide dots */
     .slide-dots {
       position: absolute;
       bottom: 32px;
@@ -81,7 +81,6 @@
       display: flex;
       gap: 10px;
     }
-    
     .dot {
       width: 8px; height: 8px;
       border-radius: 50%;
@@ -90,9 +89,9 @@
       transition: background 0.3s, transform 0.3s;
       padding: 0;
     }
-    
     .dot.active { background: var(--gold); transform: scale(1.4); }
 
+    /* Hero content */
     .hero-content {
       position: relative;
       z-index: 2;
@@ -100,7 +99,6 @@
       padding: 0 24px;
       animation: fadeUp 1.2s ease both;
     }
-    
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(40px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -128,7 +126,6 @@
       line-height: 1.1;
       animation: fadeUp 1.2s 0.35s ease both;
     }
-    
     .hero h1 em {
       font-style: italic;
       color: var(--green-pale);
@@ -158,10 +155,17 @@
       transition: transform 0.25s, box-shadow 0.25s;
       animation: fadeUp 1.2s 0.65s ease both;
     }
-    
     .hero-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(212,168,67,0.4); }
 
-    /* Mission Section */
+    /* ── DIVIDER ── */
+    .leaf-divider {
+      text-align: center;
+      font-size: 2rem;
+      padding: 48px 24px 0;
+      color: var(--green-light);
+    }
+
+    /* ── MISSION SECTION ── */
     .mission {
       max-width: 900px;
       margin: 0 auto;
@@ -171,7 +175,6 @@
       gap: 64px;
       align-items: center;
     }
-    
     @media (max-width: 640px) { .mission { grid-template-columns: 1fr; gap: 32px; } }
 
     .mission-text h2 {
@@ -182,9 +185,7 @@
       line-height: 1.25;
       margin-bottom: 20px;
     }
-    
     .mission-text h2 span { color: var(--green-light); }
-    
     .mission-text p {
       color: var(--text-muted);
       line-height: 1.8;
@@ -198,15 +199,12 @@
       aspect-ratio: 4/5;
       box-shadow: 0 24px 64px rgba(1,45,29,0.18);
     }
-    
     .mission-visual img {
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 6s ease;
     }
-    
     .mission-visual:hover img { transform: scale(1.06); }
-    
     .mission-badge {
       position: absolute;
       bottom: 20px; left: 20px;
@@ -219,12 +217,11 @@
       letter-spacing: 0.5px;
     }
 
-    /* Stats Section */
+    /* ── STATS STRIP ── */
     .stats {
       background: var(--green-dark);
       padding: 52px 24px;
     }
-    
     .stats-inner {
       max-width: 900px;
       margin: 0 auto;
@@ -233,7 +230,6 @@
       gap: 32px;
       text-align: center;
     }
-    
     @media (max-width: 520px) { .stats-inner { grid-template-columns: 1fr; gap: 24px; } }
 
     .stat-num {
@@ -243,7 +239,6 @@
       color: var(--gold);
       line-height: 1;
     }
-    
     .stat-label {
       font-size: 0.85rem;
       color: var(--green-pale);
@@ -252,14 +247,13 @@
       text-transform: uppercase;
     }
 
-    /* Team Section */
+    /* ── TEAM SECTION ── */
     .team {
       max-width: 900px;
       margin: 0 auto;
       padding: 80px 24px;
       text-align: center;
     }
-    
     .section-label {
       font-size: 11px;
       letter-spacing: 3px;
@@ -268,7 +262,6 @@
       font-weight: 600;
       margin-bottom: 12px;
     }
-    
     .team h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.8rem, 4vw, 2.6rem);
@@ -282,7 +275,6 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 32px;
     }
-    
     @media (max-width: 520px) { .team-cards { grid-template-columns: 1fr; } }
 
     .team-card {
@@ -292,12 +284,10 @@
       box-shadow: 0 4px 24px rgba(1,45,29,0.08);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    
     .team-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 48px rgba(1,45,29,0.16);
     }
-    
     .team-card-img {
       width: 100%;
       aspect-ratio: 1;
@@ -307,22 +297,18 @@
       justify-content: center;
       font-size: 5rem;
     }
-    
     .team-card-body { padding: 24px; }
-    
     .team-card-body h3 {
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem;
       font-weight: 700;
       color: var(--green-dark);
     }
-    
     .team-card-body p {
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-top: 6px;
     }
-    
     .team-card-role {
       display: inline-block;
       margin-top: 12px;
@@ -336,13 +322,12 @@
       border-radius: 100px;
     }
 
-    /* Footer CTA */
+    /* ── FOOTER CTA ── */
     .footer-cta {
       background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
       text-align: center;
       padding: 72px 24px;
     }
-    
     .footer-cta h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.6rem, 4vw, 2.4rem);
@@ -350,13 +335,11 @@
       font-weight: 700;
       margin-bottom: 12px;
     }
-    
     .footer-cta p {
       color: rgba(255,255,255,0.6);
       font-size: 1rem;
       margin-bottom: 32px;
     }
-    
     .back-btn {
       display: inline-block;
       padding: 14px 40px;
@@ -369,7 +352,6 @@
       border-radius: 100px;
       transition: transform 0.25s, box-shadow 0.25s;
     }
-    
     .back-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(212,168,67,0.35); }
 
     .footer-note {
@@ -382,7 +364,7 @@
 </head>
 <body>
 
-  <!-- HERO WITH SLIDESHOW -->
+  <!-- ── HERO WITH SLIDESHOW ── -->
   <section class="hero">
     <div class="slides">
       <div class="slide active"></div>
@@ -407,7 +389,7 @@
     </div>
   </section>
 
-  <!-- MISSION -->
+  <!-- ── MISSION ── -->
   <section id="mission" class="mission">
     <div class="mission-text">
       <h2>Our <span>Mission</span> & Vision</h2>
@@ -421,7 +403,7 @@
     </div>
   </section>
 
-  <!-- STATS -->
+  <!-- ── STATS ── -->
   <section class="stats">
     <div class="stats-inner">
       <div>
@@ -439,14 +421,14 @@
     </div>
   </section>
 
-  <!-- TEAM -->
+  <!-- ── TEAM ── -->
   <section class="team">
     <div class="section-label">The People Behind It</div>
     <h2>Meet the Founders</h2>
     <div class="team-cards">
       <div class="team-card">
         <div onclick="smnk()" class="team-card-img">🧑‍🌾</div>
-        <div class="team-card-body">
+        <div  class="team-card-body">
           <h3>Methun Krishna S</h3>
           <p>Visionary behind AGRINEXUS — passionate about transforming agriculture through smart digital tools and farmer-first thinking.</p>
           <span class="team-card-role">Co-Founder & Lead Developer</span>
@@ -463,7 +445,7 @@
     </div>
   </section>
 
-  <!-- FOOTER CTA -->
+  <!-- ── FOOTER CTA ── -->
   <section class="footer-cta">
     <h2>Ready to Grow with Us?</h2>
     <p>Join thousands of farmers already benefiting from AGRINEXUS.</p>
@@ -472,10 +454,10 @@
   </section>
 
   <script>
-    // Slideshow functionality
+    // ── SLIDESHOW ──
     const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let current = 0, timer;
+    const dots   = document.querySelectorAll('.dot');
+    let current  = 0, timer;
 
     function goToSlide(n) {
       slides[current].classList.remove('active');
@@ -493,7 +475,7 @@
 
     timer = setInterval(nextSlide, 5000);
 
-    // Counter animation
+    // ── COUNTER ANIMATION ──
     function animateCount(el, target, suffix = '') {
       let start = 0;
       const step = Math.ceil(target / 60);
